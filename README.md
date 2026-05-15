@@ -1,11 +1,10 @@
 # Ascend Qwen MindIE Bundle
 
-这个目录整理了当前可用的 `MindIE` 部署脚本、配置文件和 `Qwen3` 的 `tokenizer_config.json` 覆盖模板。
+
+这个目录整理了给 华为EA 800I A2，昇腾 Ascend 910B4-1（64G）用的 `MindIE` 部署脚本、配置文件和 `Qwen3` 的 `tokenizer_config.json` 覆盖模板（用于关闭思考模式）。
 
 特点：
 
-- 脚本已改成相对路径，自包含使用
-- 不直接修改 `/opt/models` 原始文件
 - 通过 `docker run -v` 挂载覆盖版 `tokenizer_config.json`
 - 当前这些模型已验证普通 chat 请求不显示 `<think>`：
   - `Qwen3-0.6B-Mindie`
@@ -44,5 +43,5 @@ bash ./run-qwen3-14b-mindie-card2.sh
 说明：
 
 - 模型权重默认仍从 `/opt/models/MindSDK/...` 读取
-- 宿主机需已安装 Ascend 驱动和相关运行环境
+- 宿主机需已安装 Ascend 驱动和 CANN Toolkit 等相关运行环境
 - 端口、卡号、容器名都写在脚本和配置里，可按需修改
