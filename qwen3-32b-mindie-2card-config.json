@@ -1,0 +1,75 @@
+{
+    "Version" : "1.0.0",
+    "ServerConfig" :
+    {
+        "ipAddress" : "0.0.0.0",
+        "managementIpAddress" : "127.0.0.2",
+        "port" : 38005,
+        "managementPort" : 1226,
+        "metricsPort" : 1227,
+        "allowAllZeroIpListening" : true,
+        "maxLinkNum" : 1000,
+        "httpsEnabled" : false,
+        "fullTextEnabled" : false,
+        "inferMode" : "standard",
+        "interCommTLSEnabled" : false,
+        "interCommPort" : 1321,
+        "openAiSupport" : "vllm",
+        "tokenTimeout" : 600,
+        "e2eTimeout" : 600,
+        "distDPServerEnabled": false
+    },
+    "BackendConfig" : {
+        "backendName" : "mindieservice_llm_engine",
+        "modelInstanceNumber" : 1,
+        "npuDeviceIds" : [[0,1]],
+        "tokenizerProcessNumber" : 2,
+        "multiNodesInferEnabled" : false,
+        "multiNodesInferPort" : 1320,
+        "interNodeTLSEnabled" : false,
+        "ModelDeployConfig" :
+        {
+            "maxSeqLen" : 32768,
+            "maxInputTokenLen" : 28672,
+            "truncation" : false,
+            "ModelConfig" : [
+                {
+                    "modelInstanceType" : "Standard",
+                    "modelName" : "Qwen3-32B-Mindie",
+                    "modelWeightPath" : "/opt/models/MindSDK/Qwen3-32B",
+                    "worldSize" : 2,
+                    "cpuMemSize" : 5,
+                    "npuMemSize" : 18,
+                    "backendType" : "atb",
+                    "trustRemoteCode" : false,
+                    "async_scheduler_wait_time": 120,
+                    "kv_trans_timeout": 10,
+                    "kv_link_timeout": 1080,
+                    "models": {
+                        "qwen3": {
+                            "enable_reasoning": false,
+                            "enable_thinking": false
+                        }
+                    }
+                }
+            ]
+        },
+        "ScheduleConfig" :
+        {
+            "templateType" : "Standard",
+            "templateName" : "Standard_LLM",
+            "cacheBlockSize" : 128,
+            "maxPrefillBatchSize" : 1,
+            "maxPrefillTokens" : 28672,
+            "prefillTimeMsPerReq" : 150,
+            "prefillPolicyType" : 0,
+            "decodeTimeMsPerReq" : 50,
+            "decodePolicyType" : 0,
+            "maxBatchSize" : 2,
+            "maxIterTimes" : 1024,
+            "maxPreemptCount" : 0,
+            "supportSelectBatch" : false,
+            "maxQueueDelayMicroseconds" : 5000
+        }
+    }
+}
