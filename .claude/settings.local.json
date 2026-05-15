@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -m py_compile benchmark/prompts.py benchmark/benchmark_mindie.py)",
+      "Bash(python3 *)"
+    ]
+  }
+}
